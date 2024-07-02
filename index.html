@@ -1,0 +1,107 @@
+<!doctype html>
+<html>
+<head>
+    <title>Crime Rate Prediction</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}">
+    <script>
+        function updateDistricts() {
+            var province = document.getElementById("Province").value;
+            var districtsDropdown = document.getElementById("District");
+
+            // Clear existing options
+            districtsDropdown.innerHTML = "<option value=''>Select District</option>";
+
+            var districts = [];
+
+            if (province === "KPK") {
+                districts = ["Abbottabad", "Bajaur", "Bannu", "Battagram", "Buner", "Charsadda",
+                    "Chitral", "Chitral Lower", "Chitral Upper", "D.I. Khan", "Dir Lower", 
+                    "Dir Upper", "Hangu", "Haripur", "Karak", "Khyber", "Kohat", 
+                    "Kohistan", "Kohistan Kolai Palas", "Kohistan Lower", "Kohistan Upper",
+                    "Kurram", "Lakki Marwat", "Malakand", "Mansehra", "Mardan", "Mohmand",
+                    "North Waziristan", "Nowshera", "Orakzai", "Peshawar", "Shangla",
+                    "South Waziristan", "Swabi", "Swat", "Tank", "Tor Ghar"];
+            } else if (province === "Punjab") {
+                districts = ["Attock", "Bahawalnagar", "Bahawalpur", "Bhakkar", "Chakwal", "Chiniot",
+                    "D.G.Khan", "Faisalabad", "Gujranwala", "Gujrat", "Hafizabad", "Jhang",
+                    "Jhelum", "Kasur", "Khanewal", "Khushab", "Lahore", "Layyah", "Lodhran",
+                    "M.B.Din", "Mandi Baha-ud-Din", "Mianwali", "Multan", "Muzaffargarh",
+                    "Nankana Sahib", "Narowal", "Okara", "Pakpattan", "R.Y.Khan", "Rajanpur",
+                    "Rawalpindi", "Sahiwal", "Sargodha", "Sheikhupura", "Sialkot", "T.T. Singh",
+                    "Vehari"];
+            } else if (province === "Sindh") {
+                districts = ["Badin", "Dadu", "Ghotki", "Hyderabad", "Jacobabad", "Jamshoro",
+                    "Kamber Shahdadkot", "Karachi", "Kashmore", "Khairpur", "Larkana", "Malir",
+                    "Matiari", "Matyari", "Mirpurkhas", "N. Feroze", "S.B Abad",
+                    "Sajawal", "Sanghar", "Shikarpur", "Sujawal", "Sukkur", "T.A Yar",
+                    "T.M Khan", "Tharparkar", "Thatta", "Umerkot"];
+            }
+
+            // Add districts to the dropdown
+            districts.forEach(function(district) {
+                var option = document.createElement("option");
+                option.text = district;
+                option.value = district;
+                districtsDropdown.add(option);
+            });
+        }
+    </script>
+</head>
+<body>
+    <h1>CRIME RATE PREDICTION</h1>
+    <form method="POST" action="/predict">
+        <label for="Province">Province:</label>
+        <select name="Province" id="Province" onchange="updateDistricts()" required>
+            <option value="">Select Province</option>
+            <option value="KPK">KPK</option>
+            <option value="Punjab">Punjab</option>
+            <option value="Sindh">Sindh</option>
+        </select><br>
+
+        <label for="District">District:</label>
+        <select name="District" id="District" required>
+            <option value="">Select District</option>
+            <!-- Districts will be dynamically populated based on province selection -->
+        </select><br>
+
+        <label for="CrimeType">Crime Type:</label>
+        <select name="Crime Type" id="CrimeType" required>
+            <option value="">Select Crime Type</option>
+            <option value="Assault on Govt. Servants">Assault on Govt. Servants</option>
+            <option value="Attempt to Murder">Attempt to Murder</option>
+            <option value="Bank dacoity/robbery">Bank dacoity/robbery</option>
+            <option value="Burglary">Burglary</option>
+            <option value="Car Snatching">Car Snatching</option>
+            <option value="Cattle Theft">Cattle Theft</option>
+            <option value="Child Lifting">Child Lifting</option>
+            <option value="Dacoity">Dacoity</option>
+            <option value="Honour killing">Honour killing</option>
+            <option value="Hurt">Hurt</option>
+            <option value="Kidnapping/ Abduction">Kidnapping/ Abduction</option>
+            <option value="Misc.">Misc.</option>
+            <option value="Motor Cycle Theft">Motor Cycle Theft</option>
+            <option value="Murder">Murder</option>
+            <option value="Murder during dacoity/robbery">Murder during dacoity/robbery</option>
+            <option value="Murder in the form of target killing">Murder in the form of target killing</option>
+            <option value="Other Thefts">Other Thefts</option>
+            <option value="Rape">Rape</option>
+            <option value="Rioting">Rioting</option>
+            <option value="Robbery">Robbery</option>
+            <option value="Vehicle Theft">Vehicle Theft</option>
+        </select><br>
+        
+        <label for="Year">Year:</label>
+        <select name="Year" id="Year" required>
+            <option value="">Select Year</option>
+            <!-- Generate year options from 2011 to 2030 -->
+            <script>
+                for (let year = 2011; year <= 2030; year++) {
+                    document.write(`<option value="${year}">${year}</option>`);
+                }
+            </script>
+        </select><br>
+        
+        <input type="submit" value="Predict">
+    </form>
+</body>
+</html>
