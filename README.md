@@ -1,4 +1,4 @@
-# Crime-Rate-Prediction
+# Crime Rate Prediction Web App
 ## Overview
 
 This web application predicts crime rates based on user inputs such as province, district, crime type, and year using machine learning models trained on data from KPK, Punjab, and Sindh provinces.
@@ -22,7 +22,6 @@ This web application predicts crime rates based on user inputs such as province,
 
 - app.py: Main Flask application file.
 - model.py: Functions to load machine learning models and make predictions.
-- requirements.txt: List of Python dependencies.
 - templates/: Directory containing HTML templates.
 - static/: Directory containing static files such as CSS and Images.
 - models/: Directory containing serialized machine learning models.
